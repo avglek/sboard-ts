@@ -1,0 +1,56 @@
+.App {
+  width: 100vw;
+  height: 97vh;
+  display: grid;
+  grid-template-areas:
+    "left main pict"
+    "left marq pict";
+  margin: 0;
+  /* grid-template-columns: 4fr 700px 300px; */
+  grid-template-columns: 4fr 11fr 300px;
+  grid-template-rows: 1fr 40px;
+}
+
+/* Левая панель */
+.leftBox {
+  grid-area: left;
+  padding: 10px;
+  min-height: 200px;
+  border: 1px solid green;
+}
+
+/* Область карты */
+.mapBox {
+  grid-area: main;
+  overflow: hidden;
+  padding: 10px;
+  border: 1px solid gray;
+}
+
+/* Область информации*/
+.informBox {
+  grid-area: pict;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-between;
+  overflow-y: hidden;
+  border: 1px solid blue;
+}
+
+/* Бегущая строка */
+.mqConteiner {
+  grid-area: marq;
+  width: 800px;
+  border: 1px solid red;
+  margin: auto;
+}
+
+.mqBox {
+  color: red;
+  white-space: nowrap;
+}
