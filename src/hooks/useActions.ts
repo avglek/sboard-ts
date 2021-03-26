@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux"
-import { bindActionCreators } from "redux"
-import * as NavbarAction from "../store/actions/navbarAction"
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Actions } from "../store/actions/";
 
 export const useActions = () => {
-  const dispatch = useDispatch()
-  return bindActionCreators(NavbarAction, dispatch)
-}
+  const dispatch = useDispatch();
+  return bindActionCreators(Actions, dispatch);
+};
