@@ -1,4 +1,3 @@
-import { xml } from "d3";
 declare var __INITIAL_STATE__: any;
 
 const applicationInitialState = __INITIAL_STATE__;
@@ -20,16 +19,8 @@ class DataService {
     return data;
   }
 
-  async getSvgXML(url: string) {
-    //await timeout(4000);
-    try {
-      const svgXml = await xml(url);
-      const svg = svgXml.documentElement;
-      svg.setAttribute("preserveAspectRatio", "xMidYMin");
-      return svg;
-    } catch (e) {
-      throw new Error(`Cloud not svg ${url}, error ${e}`);
-    }
+  async getPrognoz(id: number) {
+    return await this.getResurce(`${config.prognoz}${id}`);
   }
 
   private async getResurce(url: string) {

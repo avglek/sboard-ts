@@ -1,14 +1,26 @@
-import { RefObject } from "react";
+import { Dispatch, RefObject } from "react";
 import * as d3 from "d3";
 //import { RootState } from "../store/reducers";
-import { ConfigURLType } from "../types/mapConfigType";
+import { IMapDescript } from "../types/mapConfigType";
 import mapConfig from "../config/configURL";
+import { mapSvgAction, mapSvgActionTypes } from "../types/mapSvgType";
+import { select } from "d3";
 
-export function getMapConfig(selector: string): ConfigURLType {
-  return mapConfig.find((item) => {
-    const index = item.keys.indexOf(selector);
-    return index >= 0;
+export function getMapConfig(
+  selector: string | number | undefined
+): IMapDescript | null {
+  if (selector === undefined) {
+    return null;
+  }
+  const result = mapConfig.find((item) => {
+    if (typeof selector === "string") {
+      const index = item.keys.indexOf(selector);
+      return index >= 0;
+    } else {
+      return selector === item.uid;
+    }
   });
+  return result ? result : null;
 }
 
 export function loadSVG(url: string, ref: RefObject<HTMLDivElement>): void {
@@ -20,63 +32,17 @@ export function loadSVG(url: string, ref: RefObject<HTMLDivElement>): void {
   });
 }
 
-// export function mapEvents(action: any, store: RootState): void {
-//   d3.selectAll("title").remove();
-//   const { params } = store.mapsvg;
+export function eventRegion(postSvg: {
+  (selector: string):
+    | ((dispatch: Dispatch<mapSvgAction>) => Promise<void>)
+    | { type: mapSvgActionTypes; payload: string };
+  (arg0: any): void;
+}) {
+  const regions = select("#buttons").selectAll("g");
 
-//   if (params) {
-//     if (params.map === "tablo") {
-//       eventsTablo(action, store);
-//     }
-//   }
-// }
-
-// function eventsTablo(action: any, store: RootState): void {
-//   const regions = d3.select("#buttons").selectAll("g");
-
-//   regions
-//     .on("mouseenter", null)
-//     .on("mouseleave", null)
-//     .on("click", (e: MouseEvent) => reg_click(e, action));
-// }
-
-// function reg_click(e: MouseEvent, action: any) {
-//   console.log(e.currentTarget);
-//   const el = e.currentTarget as HTMLElement;
-//   const str = el.getAttribute("id");
-//   console.log(str);
-//   if (str) {
-//     const map = getMap(str);
-//     console.log(map);
-//     action.loadMapSvg(map);
-//   }
-// }
-//let node = d3.select(this).attr("id");
-
-// if (node != null) {
-//   let url = regions[node].url;
-//   if (typeof url !== undefined) {
-//     let img = regions[node].img_leg;
-//     parentProps.postLegend(img);
-//     parentProps.postSpec(
-//       regions[node].img_spec ? regions[node].img_spec : null
-//     );
-
-//     // const prognozUrl = config.prognoz.toString() + regions[node].id;
-//     // parentProps.forecastFetchData(prognozUrl);
-//     parentProps.forecastFetchData(regions[node].id);
-//     parentProps.forecastOpen();
-//     //parentProps.postStormIconsFetch(regions[node].id);
-//     loadRegions(url, regions[node].id);
-//   }
-//   // }
-// }
-
-// function reg_mouseout() {
-//   d3.select(this).selectAll("rect").attr("fill-opacity", "0.35");
-// }
-
-// function reg_mousein() {
-//   let d = d3.select(this).selectAll("rect");
-//   d.attr("fill-opacity", "1");
-// }
+  regions.on("click", (e) => {
+    const current = e.currentTarget;
+    const id = current.id;
+    postSvg(id);
+  });
+}

@@ -1,4 +1,4 @@
-import { IConfigURL } from "../types/mapConfigType";
+import { IMapDescript } from "../types/mapConfigType";
 
 export default [
   {
@@ -7,6 +7,7 @@ export default [
     img_leg: "./svg/legend.svg",
     img_spec: null,
     keys: ["main"],
+    uid: 0,
   },
   {
     map: "big_tablo",
@@ -14,6 +15,7 @@ export default [
     img_leg: "./svg/big_legend.svg",
     img_spec: null,
     keys: ["big_main"],
+    uid: 10,
   },
   {
     map: "nod1",
@@ -21,6 +23,7 @@ export default [
     img_leg: "./svg/moscow_legend.svg",
     img_spec: "./svg/moscow_legend_table.svg",
     keys: ["nod1", "go_moscow"],
+    uid: 1,
   },
   {
     map: "nod2",
@@ -28,6 +31,7 @@ export default [
     img_leg: "./svg/vit_legend.svg",
     img_spec: "./svg/vit_legend_table.svg",
     keys: ["nod2", "go_spb_vit"],
+    uid: 2,
   },
   {
     map: "nod3",
@@ -35,6 +39,7 @@ export default [
     img_leg: "./svg/spb_legend.svg",
     img_spec: "./svg/spb_legend_table.svg",
     keys: ["nod3", "go_spb"],
+    uid: 3,
   },
   {
     map: "nod4",
@@ -42,6 +47,7 @@ export default [
     img_leg: "./svg/petrozavodsk_legend.svg",
     img_spec: "./svg/petrozavodsk_legend_table.svg",
     keys: ["nod4", "go_petrozavodsk"],
+    uid: 4,
   },
   {
     map: "nod5",
@@ -49,6 +55,7 @@ export default [
     img_leg: "./svg/murm_legend.svg",
     img_spec: "./svg/murm_legend_table.svg",
     keys: ["nod5", "go_murm"],
+    uid: 5,
   },
   {
     map: "nod6",
@@ -56,11 +63,13 @@ export default [
     img_leg: "./svg/volhov_legend.svg",
     img_spec: "./svg/volhov_legend_table.svg",
     keys: ["nod6", "go_volhov"],
+    uid: 6,
   },
   {
     map: "city",
     url: "./svg/city.svg",
     img_leg: "./svg/city_legend.svg",
     keys: ["city", "go_city"],
+    uid: 7,
   },
-] as IConfigURL[];
+] as IMapDescript[];

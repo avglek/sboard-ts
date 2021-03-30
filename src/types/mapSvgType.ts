@@ -1,14 +1,14 @@
-import { IConfigURL } from "./mapConfigType";
+import { IMapDescript } from "./mapConfigType";
 
 export enum mapSvgActionTypes {
   MAPSVG_FETCH_ERRORED = "MAPSVG_FETCH_ERRORED",
   MAPSVG_FETCH_SUCCESS = "MAPSVG_FETCH_SUCCESS",
   MAPSVG_LOADING_START = "MAPSVG_LOADING_START",
+  MAPSVG_SET_CALLPLACE = "MAPSVG_SET_CALLPLACE",
 }
 
 interface ImapSvgFethSuccess {
   type: mapSvgActionTypes.MAPSVG_FETCH_SUCCESS;
-  payload: HTMLElement;
 }
 interface ImapSvgFethError {
   type: mapSvgActionTypes.MAPSVG_FETCH_ERRORED;
@@ -16,17 +16,23 @@ interface ImapSvgFethError {
 }
 interface ImapSvgStartLoading {
   type: mapSvgActionTypes.MAPSVG_LOADING_START;
-  payload: IConfigURL;
+  payload: IMapDescript;
+}
+interface ImapSvgSetCallplace {
+  type: mapSvgActionTypes.MAPSVG_SET_CALLPLACE;
+  payload: number;
 }
 
 export interface ImapSvgState {
-  map: HTMLElement | null;
+  success: boolean;
   loading: boolean;
   error: null | string;
-  params: IConfigURL | null;
+  descript: IMapDescript | null;
+  callplace: number;
 }
 
 export type mapSvgAction =
   | ImapSvgFethError
   | ImapSvgFethSuccess
-  | ImapSvgStartLoading;
+  | ImapSvgStartLoading
+  | ImapSvgSetCallplace;

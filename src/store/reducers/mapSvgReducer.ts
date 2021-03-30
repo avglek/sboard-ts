@@ -5,10 +5,11 @@ import {
 } from "../../types/mapSvgType";
 
 const initialState: ImapSvgState = {
-  map: null,
+  success: false,
   loading: false,
   error: null,
-  params: null,
+  descript: null,
+  callplace: 0,
 };
 
 export const mapSvgReduser = (
@@ -19,24 +20,29 @@ export const mapSvgReduser = (
     case mapSvgActionTypes.MAPSVG_LOADING_START:
       return {
         ...state,
-        params: action.payload,
+        descript: action.payload,
         loading: true,
+        success: false,
         error: null,
-        map: null,
       };
     case mapSvgActionTypes.MAPSVG_FETCH_SUCCESS:
       return {
         ...state,
         loading: false,
+        success: true,
         error: null,
-        map: action.payload,
       };
     case mapSvgActionTypes.MAPSVG_FETCH_ERRORED:
       return {
         ...state,
         loading: false,
+        success: false,
         error: action.payload,
-        map: null,
+      };
+    case mapSvgActionTypes.MAPSVG_SET_CALLPLACE:
+      return {
+        ...state,
+        callplace: action.payload,
       };
     default:
       return state;

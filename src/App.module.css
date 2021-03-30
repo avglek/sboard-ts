@@ -16,7 +16,6 @@
   grid-area: left;
   padding: 10px;
   min-height: 200px;
-  border: 1px solid green;
 }
 
 /* Область карты */
@@ -36,10 +35,9 @@
   padding-right: 10px;
   display: flex;
   flex-direction: column;
-  align-items: left;
+  /* align-items: left; */
   justify-content: space-between;
   overflow-y: hidden;
-  border: 1px solid blue;
 }
 
 /* Бегущая строка */

@@ -1,5 +1,5 @@
-import * as mainListner from "./mainListner";
+import * as buttonListner from "./buttonListner";
 
 export const Listners = {
-  ...mainListner,
+  ...buttonListner,
 };

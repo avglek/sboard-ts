@@ -1,41 +1,29 @@
-import { Dispatch } from "redux";
 import { mapSvgAction, mapSvgActionTypes } from "../../types/mapSvgType";
-import DataService from "../../services/DataService";
-//import { IConfigURL } from "../../types/mapConfigType";
-import { getMapConfig } from "../../utils/mapUtils";
+import { IMapDescript } from "../../types/mapConfigType";
 
-const dataService = new DataService();
+export const loadMap = (payload: IMapDescript): mapSvgAction => {
+  return {
+    type: mapSvgActionTypes.MAPSVG_LOADING_START,
+    payload,
+  };
+};
 
-export const loadMapSvg = (selector: string) => {
-  console.log("start loading:", selector);
-  const current = getMapConfig(selector);
+export const fetchMapSuccess = (): mapSvgAction => {
+  return {
+    type: mapSvgActionTypes.MAPSVG_FETCH_SUCCESS,
+  };
+};
 
-  console.log("a:", current);
+export const fetchMapError = (payload: string): mapSvgAction => {
+  return {
+    type: mapSvgActionTypes.MAPSVG_FETCH_ERRORED,
+    payload,
+  };
+};
 
-  if (current) {
-    return async (dispatch: Dispatch<mapSvgAction>) => {
-      try {
-        dispatch({
-          type: mapSvgActionTypes.MAPSVG_LOADING_START,
-          payload: current,
-        });
-        console.log("current url:", current.url);
-        const data = await dataService.getSvgXML(current.url);
-        dispatch({
-          type: mapSvgActionTypes.MAPSVG_FETCH_SUCCESS,
-          payload: data,
-        });
-      } catch (e) {
-        dispatch({
-          type: mapSvgActionTypes.MAPSVG_FETCH_ERRORED,
-          payload: `Ошибка загрузки карты: ${e}`,
-        });
-      }
-    };
-  } else {
-    return {
-      type: mapSvgActionTypes.MAPSVG_FETCH_ERRORED,
-      payload: `Ошибка загрузки карты: config is null`,
-    };
-  }
+export const setCallplace = (payload: number): mapSvgAction => {
+  return {
+    type: mapSvgActionTypes.MAPSVG_SET_CALLPLACE,
+    payload,
+  };
 };

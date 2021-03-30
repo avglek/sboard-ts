@@ -173,11 +173,8 @@ function reg_click() {
         regions[node].img_spec ? regions[node].img_spec : null
       );
 
-      // const prognozUrl = config.prognoz.toString() + regions[node].id;
-      // parentProps.forecastFetchData(prognozUrl);
       parentProps.forecastFetchData(regions[node].id);
       parentProps.forecastOpen();
-      //parentProps.postStormIconsFetch(regions[node].id);
       loadRegions(url, regions[node].id);
     }
   }

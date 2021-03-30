@@ -1,23 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import classes from "./App.module.css";
 import NavBar from "./components/NavBar/NavBar";
 import MapContainer from "./components/Map/MapContainer";
 import LoaderConteiner from "./components/LoaderSpinner/LoaderConteiner";
-import { useActions } from "./hooks/useActions";
+import Inform from "./components/Inform/Inform";
 
 const App: React.FC = () => {
-  const { loadMapSvg } = useActions();
-
-  useEffect(() => {
-    loadMapSvg("main");
-  }, [loadMapSvg]);
-
   return (
     <div className={classes.App}>
       <LoaderConteiner />
       <MapContainer className={classes.mapBox} />
       <NavBar className={classes.leftBox} />
-      <div className={classes.informBox}></div>
+      <Inform className={classes.informBox} />
       <div className={classes.mqBox}></div>
     </div>
   );

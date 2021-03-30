@@ -7,9 +7,10 @@ const LoaderConteiner: React.FC = () => {
   const state = useTypedSelector((state) => state);
 
   const navLoading = state.navbar.loading;
-  const mapLoading = state.mapsvg.loading;
+  //const mapLoading = state.mapsvg.loading;
 
-  if (navLoading || mapLoading) {
+  //if (navLoading || mapLoading) {
+  if (navLoading) {
     return (
       <div className={classes.LoaderBox}>
         <LoaderSpinner />
