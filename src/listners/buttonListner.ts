@@ -1,7 +1,6 @@
 import { select } from "d3";
 import React from "react";
-import { IMapDescript } from "../types/mapConfigType";
-import { mapSvgAction } from "../types/mapSvgType";
+import { mapSvgAction, IMapDescript } from "../types/mapSvgType";
 import { getMapConfig } from "../utils/mapUtils";
 
 type postAction = (payload: IMapDescript) => mapSvgAction;
@@ -42,8 +41,8 @@ export const addButtonListner = (
     .on("click", (e) => doLoadMap(e, postMap));
 };
 
-function fillOpacityRect(e: MouseEvent, opacity: string) {
-  const node = e.currentTarget as HTMLElement;
+function fillOpacityRect(e: React.MouseEvent<HTMLElement>, opacity: string) {
+  const node = e.currentTarget;
   const id = node.id;
   if (id) {
     select(`#${id}`).selectAll("rect").attr("fill-opacity", opacity);

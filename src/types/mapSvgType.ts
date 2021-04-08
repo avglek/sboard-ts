@@ -1,5 +1,3 @@
-import { IMapDescript } from "./mapConfigType";
-
 export enum mapSvgActionTypes {
   MAPSVG_FETCH_ERRORED = "MAPSVG_FETCH_ERRORED",
   MAPSVG_FETCH_SUCCESS = "MAPSVG_FETCH_SUCCESS",
@@ -36,3 +34,12 @@ export type mapSvgAction =
   | ImapSvgFethSuccess
   | ImapSvgStartLoading
   | ImapSvgSetCallplace;
+
+export interface IMapDescript {
+  map: string;
+  url: string;
+  img_leg: string | null;
+  img_spec: string | null;
+  keys: Array<string>;
+  uid: number;
+}

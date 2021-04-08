@@ -1,0 +1,22 @@
+.scrollTable {
+  height: 25rem;
+  overflow-y: auto;
+}
+
+.scrollTable td {
+  font-size: 0.9em;
+  padding: 1em;
+}
+.scrollTable td p {
+  margin-bottom: 0.1em;
+}
+
+/* virtual Link  */
+.vlink {
+  color: blue;
+  text-decoration: underline;
+}
+
+.vlink:hover {
+  cursor: pointer;
+}

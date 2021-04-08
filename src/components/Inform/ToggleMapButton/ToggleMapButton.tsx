@@ -1,16 +1,16 @@
 import React from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { IMapStorage } from "../../../types/mapConfigType";
+import { IMapToggleStorage } from "../../../types/mapToggleType";
 import classes from "./ToggleMapButton.module.css";
 
-const saveLocalStorage = (storage: IMapStorage) => {
+const saveLocalStorage = (storage: IMapToggleStorage) => {
   const mapRaw = JSON.stringify(storage);
   localStorage.setItem("map", mapRaw);
 };
 
 const ToggleMapButton: React.FC = () => {
-  const { toggle, img, key } = useTypedSelector((state) => state.mapconf);
+  const { toggle, img, key } = useTypedSelector((state) => state.mapToggle);
   const { setConfMain } = useActions();
 
   const handlerToggle = (): void => {

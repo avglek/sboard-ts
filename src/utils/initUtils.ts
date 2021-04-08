@@ -1,10 +1,11 @@
-import { IMapStorage } from "../types/mapConfigType";
+import { IMapToggleStorage } from "../types/mapToggleType";
 
-export function loadStorage(): IMapStorage {
+// Чтение положение переключателя для загрузки основной карты
+export function loadStorage(): IMapToggleStorage {
   const mapLocal = localStorage.getItem("map");
 
   if (mapLocal) {
-    const initStorage: IMapStorage = JSON.parse(mapLocal);
+    const initStorage: IMapToggleStorage = JSON.parse(mapLocal);
 
     if (!initStorage.key) {
       localStorage.removeItem("map");

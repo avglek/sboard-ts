@@ -8,10 +8,13 @@ import {
   setCallplace,
 } from "../../store/actions/mapSvgAction";
 import { useDispatch } from "react-redux";
-import { useListnerButton } from "../../hooks/useListnerButton";
-import { getMapConfig } from "../../utils/mapUtils";
+import { useListners } from "../../hooks/useListners";
+import { getMapConfig, hideDivision } from "../../utils/mapUtils";
 import { loadStorage } from "../../utils/initUtils";
-import { setConfMain } from "../../store/actions/mapConfAction";
+import { setConfMain } from "../../store/actions/mapToggleAction";
+import { fetchStantion } from "../../store/actions/stantionAction";
+import DataService from "../../services/DataService";
+import { fetchPicket } from "../../store/actions/picketAction";
 
 interface Props {
   Width: number;
@@ -21,16 +24,24 @@ interface Props {
 const Map: React.FC<Props> = ({ Width, Height }) => {
   const dispatch = useDispatch();
   const { success, descript } = useTypedSelector((state) => state.mapsvg);
-  const { addEventButton, resetEventButton } = useListnerButton();
-  const { uid } = useTypedSelector((state) => state.mapconf);
+  const { addEvents, resetEvents } = useListners();
+  const { uid } = useTypedSelector((state) => state.mapToggle);
 
   const ref = useRef<HTMLDivElement>(null);
 
+  // Инициализация
   useEffect(() => {
+    hideDivision();
     const init = loadStorage();
     dispatch(setConfMain(init));
+    dispatch(fetchStantion());
+    dispatch(fetchPicket());
+
+    const dataSrevice = new DataService();
+    dataSrevice.getPicket();
   }, [dispatch]);
 
+  // Для переключения вида основной карты
   useEffect(() => {
     const initMap = getMapConfig(uid);
 
@@ -42,6 +53,7 @@ const Map: React.FC<Props> = ({ Width, Height }) => {
     }
   }, [uid, dispatch]);
 
+  // Загрузка карты в div
   useEffect(() => {
     const load = async () => {
       if (descript) {
@@ -64,13 +76,14 @@ const Map: React.FC<Props> = ({ Width, Height }) => {
     load();
   }, [descript, dispatch]);
 
+  // Установка слушателей
   useEffect(() => {
     if (success) {
-      addEventButton();
+      addEvents();
     }
 
-    return () => resetEventButton();
-  }, [success, addEventButton, resetEventButton]);
+    return () => resetEvents();
+  }, [success, addEvents, resetEvents]);
 
   return (
     <div

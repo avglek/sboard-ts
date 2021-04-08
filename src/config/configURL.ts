@@ -1,4 +1,4 @@
-import { IMapDescript } from "../types/mapConfigType";
+import { IMapDescript } from "../types/mapSvgType";
 
 export default [
   {

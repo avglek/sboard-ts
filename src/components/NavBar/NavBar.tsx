@@ -27,20 +27,8 @@ const NavBar: React.FC<INavbarProps> = ({ className }) => {
     []
   );
 
-  if (loading) {
-    return (
-      <div className={className}>
-        <h2>Loading ...</h2>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={className}>
-        <h2>Error {error}</h2>
-      </div>
-    );
+  if (loading || error) {
+    return <div className={className}></div>;
   }
 
   items.sort((a, b) => a.order_num - b.order_num);

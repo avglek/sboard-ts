@@ -417,7 +417,6 @@ function loadPortMap(url, parentId, port) {
     const close_btn = d3.select("#close_button");
     close_btn
       .on("click", () => {
-        console.log(parentId);
         if (parentId === 0) {
           parentProps.postSpec(null);
           parentProps.forecastClose();

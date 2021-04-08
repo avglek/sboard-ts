@@ -3,7 +3,7 @@ var initialState = {
     divisions: "http://10.35.49.146:8080/orw_tablo/division_json2.php",
     menu: "http://10.35.49.146:8080/orw_tablo/load_menu.php",
     pokaz: "http://10.35.49.146:8080/orw_tablo/load_pred_pokaz.php?code_pred=",
-    piket: "http://10.35.49.146:8080/orw_tablo/load_piket.php",
+    picket: "http://10.35.49.146:8080/orw_tablo/load_piket.php",
     prognoz: "http://10.35.49.146:8080/orw_tablo/load_prognoz.php?region=",
     storm_region:
       "http://10.35.49.146:8080/orw_tablo/load_storm_v2.php?region=",

@@ -1,21 +1,27 @@
 import React from "react";
 import classes from "./LoaderSpinner.module.css";
 
-const LoaderSpinner:React.FC = () => {
+type Props = {
+  style?: any;
+};
+
+const LoaderSpinner: React.FC<Props> = ({ style = {} }) => {
   return (
-    <div className={classes.LoaderSpinner}>
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
+    <div className={classes.LoaderBox} style={style}>
+      <div className={classes.LoaderSpinner}>
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
     </div>
   );
 };

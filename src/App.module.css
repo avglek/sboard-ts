@@ -52,3 +52,71 @@
   color: red;
   white-space: nowrap;
 }
+
+/* Меню с предприятиями */
+.context {
+  position: absolute;
+  font: 12px sans-serif;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow-y: hidden;
+  visibility: hidden;
+  z-index: 10;
+}
+
+/* Подсказка по предприятиям */
+.stooltip {
+  position: absolute;
+  text-align: center;
+  min-width: 60px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: rgba(255, 235, 58, 0.7);
+  border: 1px solid black;
+  border-radius: 5px;
+  pointer-events: none;
+  visibility: hidden;
+  z-index: 10;
+}
+.stooltip hr {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border-style: solid;
+  border-color: black;
+}
+
+.context div {
+  color: black;
+  /* цвет текста */
+  text-decoration: none;
+  /* убирать подчёркивание у ссылок */
+  user-select: none;
+  /* убирать выделение текста */
+  cursor: pointer;
+}
+
+/* Кнопка меню */
+.context .node {
+  min-height: 15px;
+  max-height: 50px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Цвет меню */
+.context .bgcolor {
+  background: rgb(221, 219, 195);
+}
+
+.context .bgcolor:hover {
+  background: rgb(171, 169, 145);
+  color: white;
+}

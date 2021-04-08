@@ -1,5 +1,8 @@
-import { mapSvgAction, mapSvgActionTypes } from "../../types/mapSvgType";
-import { IMapDescript } from "../../types/mapConfigType";
+import {
+  mapSvgAction,
+  mapSvgActionTypes,
+  IMapDescript,
+} from "../../types/mapSvgType";
 
 export const loadMap = (payload: IMapDescript): mapSvgAction => {
   return {
