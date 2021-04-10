@@ -52,7 +52,7 @@ const MapConteiner: React.FC<Props> = (props) => {
             </div>
           </div>
           <TransformComponent>
-            <Map Width={w} Height={h} />
+            <Map Width={w} Height={h} resetTransform={resetTransform} />
           </TransformComponent>
         </div>
       )}

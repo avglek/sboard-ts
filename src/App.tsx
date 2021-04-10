@@ -9,6 +9,7 @@ import Inform from "./components/Inform/Inform";
 //import DataService from "./services/DataService";
 import Report from "./components/Report/Report";
 import FaultInicator from "./components/FaultInicator/FaultInicator";
+import Drawer from "./components/SidePanel/Drawer/Drawer";
 
 //const testService = new DataService();
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
       <NavBar className={classes.leftBox} />
       <Inform className={classes.informBox} />
       <div className={classes.mqBox}></div>
+      <Drawer />
     </div>
   );
 };

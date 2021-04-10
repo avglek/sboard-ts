@@ -24,7 +24,7 @@ class DataService {
         };
 
         const result = { ...data, info };
-        console.log(result);
+        // console.log(result);
 
         return result;
     }

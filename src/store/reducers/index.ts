@@ -6,6 +6,7 @@ import { mapToggleReducer } from "./mapToggleReducer";
 import { stantionReduser } from "./stantionReducer";
 import { picketReducer } from "./picketReducer";
 import { reportReduser } from "./reportReducer";
+import { layerReduser } from "./layerReducer";
 
 export const rootReducer = combineReducers({
   navbar: navbarReduser,
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   stantion: stantionReduser,
   picket: picketReducer,
   report: reportReduser,
+  layer: layerReduser,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

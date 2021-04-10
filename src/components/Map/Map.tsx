@@ -15,13 +15,16 @@ import { setConfMain } from "../../store/actions/mapToggleAction";
 import { fetchStantion } from "../../store/actions/stantionAction";
 import DataService from "../../services/DataService";
 import { fetchPicket } from "../../store/actions/picketAction";
+import { setResetZoom } from "../../store/actions/layerAction";
+import { useLayers } from "../../hooks/useLayers";
 
 interface Props {
   Width: number;
   Height: number;
+  resetTransform: () => void;
 }
 
-const Map: React.FC<Props> = ({ Width, Height }) => {
+const Map: React.FC<Props> = ({ Width, Height, resetTransform }) => {
   const dispatch = useDispatch();
   const { success, descript } = useTypedSelector((state) => state.mapsvg);
   const { addEvents, resetEvents } = useListners();
@@ -53,6 +56,8 @@ const Map: React.FC<Props> = ({ Width, Height }) => {
     }
   }, [uid, dispatch]);
 
+  useLayers();
+
   // Загрузка карты в div
   useEffect(() => {
     const load = async () => {
@@ -65,6 +70,7 @@ const Map: React.FC<Props> = ({ Width, Height }) => {
           ref.current!.innerHTML = "";
           ref.current!.appendChild(element);
           selectAll("title").remove();
+          console.log("render");
 
           dispatch(fetchMapSuccess());
         } catch (e) {
@@ -78,12 +84,13 @@ const Map: React.FC<Props> = ({ Width, Height }) => {
 
   // Установка слушателей
   useEffect(() => {
+    dispatch(setResetZoom(resetTransform));
     if (success) {
       addEvents();
     }
 
     return () => resetEvents();
-  }, [success, addEvents, resetEvents]);
+  }, [success, addEvents, resetEvents, resetTransform, dispatch]);
 
   return (
     <div

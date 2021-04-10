@@ -30,7 +30,7 @@ const TableView: React.FC<Props> = ({ items, rowsStyles }) => {
         };
 
         if (typeof value === "object" && value) {
-          console.log("value:", value);
+          //console.log("value:", value);
 
           col.name = value.name;
           col.width = value.width; // задание ширины
@@ -88,7 +88,7 @@ const TableView: React.FC<Props> = ({ items, rowsStyles }) => {
       }
     });
 
-    console.log(all);
+    //console.log(all);
 
     return (
       <DataTable

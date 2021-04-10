@@ -17,6 +17,7 @@
     "csstype": "^3.0.7",
     "d3": "^6.6.0",
     "html-react-parser": "^1.2.4",
+    "rc-checkbox": "^2.3.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-data-table-component": "^6.11.7",

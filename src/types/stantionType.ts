@@ -87,3 +87,5 @@ export type StantionAction =
   | IStantionStartLoading;
 
 export type typeClickCallback = (event: React.MouseEvent<HTMLElement>) => void;
+
+export type StantionSearchType = { name: string; code: string; region: string };
