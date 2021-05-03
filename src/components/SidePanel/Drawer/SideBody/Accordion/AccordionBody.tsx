@@ -8,46 +8,48 @@ import {
   setLastCheck,
 } from "../../../../../store/actions/layerAction";
 import { useDispatch } from "react-redux";
-import { layersGroupInit } from "../../../../../config/layerGroupInit";
+import { layersInit } from "../../../../../config/layerInit";
+import { layersGroup } from "../../../../../config/layerGroups";
 
 const AccordionBody: React.FC = () => {
   const { items } = useTypedSelector((state) => state.layer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(postLayer(layersGroupInit));
+    dispatch(postLayer(layersInit));
   }, [dispatch]);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const name = e.currentTarget.name;
-    const check = e.currentTarget.checked;
-    dispatch(setLastCheck({ name, check }));
-
-    const layers = items.map((block) => {
-      return {
-        ...block,
-        data: block.data.map((item) => {
-          if (item.layer === name) {
-            return {
-              ...item,
-              show: e.currentTarget.checked,
-            };
-          } else {
-            return item;
-          }
-        }),
-      };
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    uid: number
+  ): void => {
+    const layers = items.map((item) => {
+      if (item.layer === e.currentTarget.name) {
+        return {
+          ...item,
+          check: e.currentTarget.checked,
+        };
+      } else {
+        return item;
+      }
     });
 
     dispatch(postLayer(layers));
+
+    const last = layers.find((i) => i.id === uid);
+    if (last) dispatch(setLastCheck(last));
   };
 
   return (
     <div className={classes.AccordionBody}>
-      {items.map((block) => {
+      {layersGroup.map((block) => {
         return (
-          <Accordion key={block.groupIndex} title={block.title}>
-            <CheckBlock blockCheck={block.data} onChange={onChange} />
+          <Accordion key={block.group} title={block.title}>
+            <CheckBlock
+              idGroup={block.group}
+              onChange={onChange}
+              items={items}
+            />
           </Accordion>
         );
       })}

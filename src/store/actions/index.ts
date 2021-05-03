@@ -6,6 +6,7 @@ import * as stantionAction from "./stantionAction";
 import * as picketAction from "./picketAction";
 import * as reportAction from "./reportAction";
 import * as layerAction from "./layerAction";
+import * as stormAction from "./stormAction";
 
 export const Actions = {
   ...navbarAction,
@@ -16,4 +17,5 @@ export const Actions = {
   ...picketAction,
   ...reportAction,
   ...layerAction,
+  ...stormAction,
 };

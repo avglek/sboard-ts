@@ -30,8 +30,6 @@ const TableView: React.FC<Props> = ({ items, rowsStyles }) => {
         };
 
         if (typeof value === "object" && value) {
-          //console.log("value:", value);
-
           col.name = value.name;
           col.width = value.width; // задание ширины
           col.right = value.align === "right";
@@ -40,12 +38,9 @@ const TableView: React.FC<Props> = ({ items, rowsStyles }) => {
           col.name = value;
         }
 
-        //const rowsStyle = { ...customStyles.rows.style };
-        //   //console.log(rowsStyle);
         if (key === "image") {
           const prefix = "http://10.35.49.146:8080/"; // для отладки
-          //   //   //customStyles.rows.style.minHeight = "180px";
-          //   //   //console.log(customStyles);
+
           col.cell = (row) => (
             <img
               alt={row.name}
@@ -87,8 +82,6 @@ const TableView: React.FC<Props> = ({ items, rowsStyles }) => {
         }
       }
     });
-
-    //console.log(all);
 
     return (
       <DataTable

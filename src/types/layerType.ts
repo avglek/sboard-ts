@@ -1,18 +1,18 @@
 // Описатель слоя
 export type LayerDescript = {
   layer: string; //Наименование слоя на карте
-  show: boolean; //Начальная видимость
+  check: boolean; //Выбран
   name: string; //Полное наименование
   visible: string; //Видимость checkbox
   disabled: boolean; //Enable checkbox
   id: number; //Уникальный индентификатор
+  group: number; //Индентификатор группы
 };
 
 //Описатель группы слоев
 export type LayerGroupDescript = {
-  title: string;
-  groupIndex: number;
-  data: LayerDescript[];
+  title: string; // Заголовок группы
+  group: number; //Индентификатор группы
 };
 
 export enum LayerActionTypes {
@@ -20,11 +20,16 @@ export enum LayerActionTypes {
   LAYER_FIND_STANTION = "LAYER_FIND_STANTION",
   LAYER_RESET_ZOOM = "LAYER_RESET_ZOOM",
   LAYER_SET_LAST_CHECK = "LAYER_SET_LAST_CHECK",
+  LAYER_CLEAR = "LAYER_CLEAR",
+}
+
+interface ILayerClear {
+  type: LayerActionTypes.LAYER_CLEAR;
 }
 
 interface ILayerChecked {
   type: LayerActionTypes.LAYER_CHECKED;
-  payload: LayerGroupDescript[];
+  payload: LayerDescript[];
 }
 
 interface ILayerFindStantion {
@@ -39,23 +44,26 @@ interface ILayerResetZoom {
 
 interface ILayerSetLastCheck {
   type: LayerActionTypes.LAYER_SET_LAST_CHECK;
-  payload: { name: string; check: boolean };
+  payload: LayerDescript;
 }
 
 export interface ILayerState {
-  items: LayerGroupDescript[];
+  items: LayerDescript[];
   findCode: string;
   resetZoom: null | (() => void);
-  lastCheck: LastCheck;
+  lastCheck: LayerDescript | null;
+  clear: boolean;
 }
 
 export type LastCheck = {
+  uid: number;
   name: string;
   check: boolean;
-}
+};
 
 export type LayerAction =
   | ILayerChecked
   | ILayerFindStantion
   | ILayerResetZoom
-  | ILayerSetLastCheck;
+  | ILayerSetLastCheck
+  | ILayerClear;

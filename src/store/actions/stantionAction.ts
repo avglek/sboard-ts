@@ -16,7 +16,7 @@ export const fetchStantion = () => {
     } catch (e) {
       dispatch({
         type: StantionActionTypes.STANTION_FETCH_ERRORED,
-        payload: `Ошибка загрузки данных: ${e}`,
+        payload: `Ошибка загрузки данных по станциям: ${e}`,
       });
     }
   };

@@ -24,6 +24,13 @@ export const setView = (payload: string): ReportAction => {
   };
 };
 
+export const setModalTitle = (payload: string): ReportAction => {
+  return {
+    type: ReportActionTypes.REPORT_SET_TITLE,
+    payload,
+  };
+};
+
 export const fetchReport = (
   report: string,
   uid: string,
@@ -36,6 +43,7 @@ export const fetchReport = (
       dispatch(modalOpen(title));
 
       const data = await dataService.getReport(report, uid);
+
       dispatch(setView(view));
       dispatch({
         type: ReportActionTypes.REPORT_FETCH_SUCCESS,

@@ -1,5 +1,6 @@
 import { Stantion } from "../types/stantionType";
 import { Picket } from "../types/picketTypes";
+//import { StormItem } from "../types/stormType";
 
 declare var __INITIAL_STATE__: any;
 
@@ -12,21 +13,29 @@ function timeout(ms: number) {
 }
 
 class DataService {
+  private async getResurce(url: string) {
+    //await timeout(3000);
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Cloud not fetch ${url}, received ${response.status}`);
+    } else {
+      return await response.json();
+    }
+  }
+
   async getReport(report: string, uid: string) {
-    await timeout(1000);
+    //await timeout(1000);
     switch (report) {
       default:
         const data = await this.getResurce(`${config[report]}${uid}`);
 
         const info = {
           header: "Информация",
+          view: "info",
           data: data.info,
         };
-
-        const result = { ...data, info };
-        // console.log(result);
-
-        return result;
+        return { ...data, info };
     }
   }
 
@@ -72,14 +81,26 @@ class DataService {
     return await this.getResurce(`${config.prognoz}${id}`);
   }
 
-  private async getResurce(url: string) {
-    //await timeout(3000);
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`Cloud not fetch ${url}, received ${response.status}`);
+  async getStorm(id: number) {
+    //await timeout(2000);
+    if (id === 0 || id === 10) {
+      const data = await this.getResurce(config.storm_all);
+      return data.map((item: any) => {
+        return {
+          train: item.region,
+          conditions: [
+            {
+              code: 0,
+              info: "",
+              begin: "",
+              end: "",
+              critical: item.critical,
+            },
+          ],
+        };
+      });
     } else {
-      return await response.json();
+      return await this.getResurce(`${config.storm_region}${id}`);
     }
   }
 }

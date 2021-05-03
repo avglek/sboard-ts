@@ -3,6 +3,11 @@ export enum mapSvgActionTypes {
   MAPSVG_FETCH_SUCCESS = "MAPSVG_FETCH_SUCCESS",
   MAPSVG_LOADING_START = "MAPSVG_LOADING_START",
   MAPSVG_SET_CALLPLACE = "MAPSVG_SET_CALLPLACE",
+  MAPSVG_SET_SUCCESS = "MAPSVG_SET_SUCCESS",
+}
+
+interface IMapSvgSetSuccess {
+  type: mapSvgActionTypes.MAPSVG_SET_SUCCESS;
 }
 
 interface ImapSvgFethSuccess {
@@ -33,7 +38,8 @@ export type mapSvgAction =
   | ImapSvgFethError
   | ImapSvgFethSuccess
   | ImapSvgStartLoading
-  | ImapSvgSetCallplace;
+  | ImapSvgSetCallplace
+  | IMapSvgSetSuccess;
 
 export interface IMapDescript {
   map: string;

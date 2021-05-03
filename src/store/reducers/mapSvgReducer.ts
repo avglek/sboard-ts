@@ -29,7 +29,6 @@ export const mapSvgReduser = (
       return {
         ...state,
         loading: false,
-        success: true,
         error: null,
       };
     case mapSvgActionTypes.MAPSVG_FETCH_ERRORED:
@@ -43,6 +42,11 @@ export const mapSvgReduser = (
       return {
         ...state,
         callplace: action.payload,
+      };
+    case mapSvgActionTypes.MAPSVG_SET_SUCCESS:
+      return {
+        ...state,
+        success: true,
       };
     default:
       return state;

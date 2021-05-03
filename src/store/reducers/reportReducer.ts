@@ -38,6 +38,12 @@ export const reportReduser = (
         ...state,
         view: action.payload,
       };
+    case ReportActionTypes.REPORT_SET_TITLE:
+      return {
+        ...state,
+        title: action.payload,
+      };
+
     default:
       return state;
   }

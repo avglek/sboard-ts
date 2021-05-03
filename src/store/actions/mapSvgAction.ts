@@ -30,3 +30,9 @@ export const setCallplace = (payload: number): mapSvgAction => {
     payload,
   };
 };
+
+export const setSuccess = (): mapSvgAction => {
+  return {
+    type: mapSvgActionTypes.MAPSVG_SET_SUCCESS,
+  };
+};

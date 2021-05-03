@@ -5,12 +5,6 @@ import classes from "./SideBody.module.css";
 import StationSearch from "./StationSearch/StationSearch";
 
 const SideBody: React.FC = () => {
-  // const { resetZoom } = useTypedSelector((state) => state.layer);
-  // const handlerClear = (): void => {
-  //   console.log("click clear");
-  //   if (resetZoom) resetZoom();
-  // };
-
   return (
     <div className={classes.SideBody}>
       <StationSearch />

@@ -11,12 +11,10 @@ import { useDispatch } from "react-redux";
 import { useListners } from "../../hooks/useListners";
 import { getMapConfig, hideDivision } from "../../utils/mapUtils";
 import { loadStorage } from "../../utils/initUtils";
-import { setConfMain } from "../../store/actions/mapToggleAction";
-import { fetchStantion } from "../../store/actions/stantionAction";
+import { Actions } from "../../store/actions";
 import DataService from "../../services/DataService";
-import { fetchPicket } from "../../store/actions/picketAction";
-import { setResetZoom } from "../../store/actions/layerAction";
 import { useLayers } from "../../hooks/useLayers";
+import { useSearchStantion } from "../../hooks/useSearchStantion";
 
 interface Props {
   Width: number;
@@ -36,9 +34,9 @@ const Map: React.FC<Props> = ({ Width, Height, resetTransform }) => {
   useEffect(() => {
     hideDivision();
     const init = loadStorage();
-    dispatch(setConfMain(init));
-    dispatch(fetchStantion());
-    dispatch(fetchPicket());
+    dispatch(Actions.setConfMain(init));
+    dispatch(Actions.fetchStantion());
+    dispatch(Actions.fetchPicket());
 
     const dataSrevice = new DataService();
     dataSrevice.getPicket();
@@ -57,12 +55,18 @@ const Map: React.FC<Props> = ({ Width, Height, resetTransform }) => {
   }, [uid, dispatch]);
 
   useLayers();
+  useSearchStantion();
 
   // Загрузка карты в div
   useEffect(() => {
     const load = async () => {
       if (descript) {
+        //Старт загрузки карты
         dispatch(loadMap(descript));
+
+        // Старт загрузки данных по слоям
+        dispatch(Actions.fecthStorm(descript.uid));
+
         try {
           const svg = await xml(descript!.url);
           const element = svg.documentElement;
@@ -70,8 +74,6 @@ const Map: React.FC<Props> = ({ Width, Height, resetTransform }) => {
           ref.current!.innerHTML = "";
           ref.current!.appendChild(element);
           selectAll("title").remove();
-          console.log("render");
-
           dispatch(fetchMapSuccess());
         } catch (e) {
           dispatch(fetchMapError(e));
@@ -84,7 +86,7 @@ const Map: React.FC<Props> = ({ Width, Height, resetTransform }) => {
 
   // Установка слушателей
   useEffect(() => {
-    dispatch(setResetZoom(resetTransform));
+    dispatch(Actions.setResetZoom(resetTransform));
     if (success) {
       addEvents();
     }

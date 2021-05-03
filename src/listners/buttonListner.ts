@@ -64,7 +64,7 @@ const returnMain = (loadMap: any, fromId: number = 0) => {
   }
 };
 
-const doLoadMap = (e: React.MouseEvent<HTMLElement>, loadMap: any) => {
+const doLoadMap = (e: React.MouseEvent<HTMLElement>, loadMap: (desc:IMapDescript)=>void) => {
   const node = e.currentTarget;
   const id = node.id;
   if (id) {

@@ -7,6 +7,7 @@ export enum ReportActionTypes {
   REPORT_MODAL_OPEN = "REPORT_MODAL_OPEN",
   REPORT_MODAL_CLOSE = "REPORT_MODAL_CLOSE",
   REPORT_SET_VIEW = "REPORT_SET_VIEW",
+  REPORT_SET_TITLE = "REPORT_SET_TITLE",
 }
 
 interface IReportFethSuccess {
@@ -37,6 +38,11 @@ interface IReportSetView {
   payload: string;
 }
 
+interface IReportSetTitle {
+  type: ReportActionTypes.REPORT_SET_TITLE;
+  payload: string;
+}
+
 export interface IReportState {
   items: IReportMap;
   loading: boolean;
@@ -52,10 +58,11 @@ export interface IReport {
   title?: {
     [key: string]: string | IParams;
   };
+  view?: string;
 }
 
 export interface IReportMap {
-  [key: string]: IReport;
+  [key: string]: string | IReport;
 }
 
 export type ReportAction =
@@ -64,4 +71,5 @@ export type ReportAction =
   | IReportStartLoading
   | IReportModalClose
   | IReportModalOpen
-  | IReportSetView;
+  | IReportSetView
+  | IReportSetTitle;

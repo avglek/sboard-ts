@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import SearchBar from "./SearchBar";
 import SearchList from "./SearchList";
 import classes from "./Search.module.css";
@@ -16,7 +16,6 @@ const Search: React.FC = () => {
 
   const { items, loading } = useTypedSelector((state) => state.stantion);
   const { resetZoom } = useTypedSelector((state) => state.layer);
-  const stantions = items;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,20 +30,20 @@ const Search: React.FC = () => {
     }
   };
 
-  const getStantionList = (): StantionSearchType[] => {
-    if (stantions) {
+  const getStantionList = useCallback((): StantionSearchType[] => {
+    if (items) {
       const result: StantionSearchType[] = [];
-      for (let item in stantions) {
-        const stn = stantions[item];
+      for (let item in items) {
+        const stn = items[item];
         result.push({
           name: stn.ms,
-          code: item,
+          code: stn.getCode(),
           region: stn.region,
         });
         stn.nodes.forEach((element) => {
           result.push({
             name: replaceInputValue(element.name, stn.ms),
-            code: item,
+            code: stn.getCode(),
             region: stn.region,
           });
         });
@@ -53,7 +52,7 @@ const Search: React.FC = () => {
     } else {
       return [];
     }
-  };
+  }, [items]);
 
   const updateInput = (input: string) => {
     if (input === "") {
@@ -70,11 +69,10 @@ const Search: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && items.length > 0) {
       setStantionsListDefault(() => getStantionList());
     }
-    // eslint-disable-next-line
-  }, [loading]);
+  }, [loading, getStantionList, items]);
 
   const listClick = (value: string) => {
     setInput(value);

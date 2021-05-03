@@ -26,6 +26,10 @@ export class Stantion {
     this.region = region;
   }
 
+  getCode() {
+    return this.ks.slice(0, 5);
+  }
+
   getNodesTxt() {
     let txt = "";
     for (const item of this.nodes) {

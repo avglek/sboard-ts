@@ -1,8 +1,7 @@
 import {
-  LastCheck,
   LayerAction,
   LayerActionTypes,
-  LayerGroupDescript,
+  LayerDescript,
 } from "../../types/layerType";
 
 export const setResetZoom = (payload: () => void): LayerAction => {
@@ -12,10 +11,16 @@ export const setResetZoom = (payload: () => void): LayerAction => {
   };
 };
 
-export const postLayer = (payload: LayerGroupDescript[]): LayerAction => {
+export const postLayer = (payload: LayerDescript[]): LayerAction => {
   return {
     type: LayerActionTypes.LAYER_CHECKED,
     payload,
+  };
+};
+
+export const postClear = (): LayerAction => {
+  return {
+    type: LayerActionTypes.LAYER_CLEAR,
   };
 };
 
@@ -26,9 +31,9 @@ export const postFindStantion = (payload: string): LayerAction => {
   };
 };
 
-export const setLastCheck = (payload: LastCheck): LayerAction => {
+export const setLastCheck = (payload: LayerDescript): LayerAction => {
   return {
     type: LayerActionTypes.LAYER_SET_LAST_CHECK,
     payload,
-  }
-}
+  };
+};

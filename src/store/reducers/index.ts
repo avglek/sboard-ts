@@ -7,6 +7,7 @@ import { stantionReduser } from "./stantionReducer";
 import { picketReducer } from "./picketReducer";
 import { reportReduser } from "./reportReducer";
 import { layerReduser } from "./layerReducer";
+import { stormReducer } from "./stormReducer";
 
 export const rootReducer = combineReducers({
   navbar: navbarReduser,
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
   picket: picketReducer,
   report: reportReduser,
   layer: layerReduser,
+  storm: stormReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

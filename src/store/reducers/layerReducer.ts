@@ -8,10 +8,8 @@ const initialState: ILayerState = {
   items: [],
   findCode: "",
   resetZoom: null,
-  lastCheck: {
-    name: "",
-    check: false,
-  },
+  lastCheck: null,
+  clear: false,
 };
 
 export const layerReduser = (
@@ -19,6 +17,8 @@ export const layerReduser = (
   action: LayerAction
 ): ILayerState => {
   switch (action.type) {
+    case LayerActionTypes.LAYER_CLEAR:
+      return { ...state, clear: !state.clear };
     case LayerActionTypes.LAYER_CHECKED:
       return { ...state, items: action.payload };
     case LayerActionTypes.LAYER_FIND_STANTION:
